@@ -15,7 +15,7 @@ Full detail lives in [spec.md](spec.md) — this file is a working-agreement sum
 | Decision | Choice |
 |---|---|
 | Platform | iOS only (iPhone), portrait only |
-| Minimum deployment target | iOS 18.0 |
+| Minimum deployment target | iOS 18.0 per spec (currently set to 18.6 — the lowest floor selectable in Xcode 26.5's SDK; treat as equivalent) |
 | Language | Swift 6, strict concurrency |
 | UI framework | SwiftUI, with `MKMapView` bridged via `UIViewRepresentable` (the one exception — SwiftUI's native `Map` can't do long-press-for-coordinate or draggable annotations) |
 | Map provider | MapKit (`MKHybridMapConfiguration` — satellite + labels), no API key |
@@ -67,14 +67,14 @@ Tests mirror this structure under `StashTests/` and `StashUITests/`. See spec §
 
 ## Build & verify
 
-Once the Xcode project exists:
+From the `Stash/` directory (where `Stash.xcodeproj` lives):
 
 ```bash
-xcodebuild -scheme Stash -destination 'platform=iOS Simulator,name=iPhone 16' build
-xcodebuild -scheme Stash -destination 'platform=iOS Simulator,name=iPhone 16' test
+xcodebuild -project Stash.xcodeproj -scheme Stash -destination 'platform=iOS Simulator,name=iPhone 17' build
+xcodebuild -project Stash.xcodeproj -scheme Stash -destination 'platform=iOS Simulator,name=iPhone 17' test
 ```
 
-(Adjust the scheme name if it differs from `Stash`.) CLI builds/tests are necessary but not sufficient — also open and run the project in Xcode at every phase boundary. Xcode surfaces a class of error (signing, capabilities, Info.plist, preview crashes) that's invisible from the command line.
+Run `xcrun simctl list devices available` if `iPhone 17` isn't installed on this machine and swap in whatever's available. CLI builds/tests are necessary but not sufficient — also open and run the project in Xcode at every phase boundary. Xcode surfaces a class of error (signing, capabilities, Info.plist, preview crashes) that's invisible from the command line.
 
 ## Working habits
 

@@ -20,7 +20,7 @@ DerivedData/
 # Swift Package Manager
 .swiftpm/
 Packages/
-Package.resolved
+# Package.resolved is intentionally tracked (app target — pins ZIPFoundation's resolved version for reproducible builds)
 
 # CocoaPods (unused here, but harmless to ignore if it ever shows up)
 Pods/
