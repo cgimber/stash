@@ -13,6 +13,10 @@ DerivedData/
 *.dSYM
 *.dSYM.zip
 
+# IDE
+*.sublime-project
+*.sublime-workspace
+
 # Swift Package Manager
 .swiftpm/
 Packages/
